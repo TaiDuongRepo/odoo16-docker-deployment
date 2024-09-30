@@ -10,17 +10,21 @@ This project provides a complete solution for deploying Odoo using Docker, Nginx
 - **Ngrok**: Provides secure tunnels to access the Odoo service over the internet.
 
 ## Folder Structure
+## File Structure
+
+```bash
 └── source
     ├── config
-    │   └── odoo.conf
-    ├── docker-compose.yml
-    ├── Dockerfile
-    ├── dump.sql
-    ├── requirements.txt
+    │   └── odoo.conf        # Odoo configuration file
+    ├── docker-compose.yml    # Docker Compose configuration
+    ├── Dockerfile            # Odoo Docker configuration
+    ├── dump.sql              # PostgreSQL database dump
+    ├── requirements.txt      # Python dependencies for Odoo
     ├── nginx
-    │   ├── default.conf
-    │   └── Dockerfile.dev
-    └── ngrok.yml
+    │   ├── default.conf      # Nginx configuration
+    │   └── Dockerfile.dev    # Nginx Docker development configuration
+    └── ngrok.yml             # Ngrok configuration
+```
 
 ## Setup Environment Variables
 
