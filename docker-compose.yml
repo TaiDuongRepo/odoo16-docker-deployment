@@ -1,0 +1,49 @@
+version: '3.1'
+services:
+  odoo:
+    build: .
+    depends_on:
+      - mydb
+    ports:
+      - "8069:8069"
+    environment:
+      - HOST=mydb
+      - USER=<db_user>
+      - PASSWORD=<db_password>
+    volumes:
+      - ./config:/etc/odoo
+      - ./extra-addons:/mnt/extra-addons
+      - ./filestore:/var/lib/odoo/.local/share/Odoo/filestore/postgres # Filestore path for Odoo if you have any
+      - ./sessions:/var/lib/odoo/.local/share/Odoo/sessions
+      - ./requirements.txt:/tmp/requirements.txt
+  mydb:
+      image: postgres:16
+      environment:
+        - POSTGRES_USER=<db_user>
+        - POSTGRES_PASSWORD=<db_password>
+        - POSTGRES_DB=<db_name>
+      restart: 
+        always
+      volumes:
+        - ./dump.sql:/docker-entrypoint-initdb.d/dump.sql # Import dump.sql file to the database if you have any
+  nginx:
+    restart: always
+    build: 
+      dockerfile: Dockerfile.dev
+      context: ./nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - odoo
+  ngrok:
+    image: ngrok/ngrok:latest
+    command: 
+      - "start"
+      - "--all"
+      - "--config"
+      - "/etc/ngrok.yml"
+    volumes:
+      - ./ngrok.yml:/etc/ngrok.yml
+    ports:
+      - "4040:4040"

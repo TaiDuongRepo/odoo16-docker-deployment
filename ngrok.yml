@@ -1,0 +1,11 @@
+authtoken: <YOUR_NGROK_AUTH_TOKEN>
+web_addr: 0.0.0.0:4040
+update: false
+log: stdout
+
+version: 2
+tunnels:
+  app:
+    labels:
+      - edge=<YOUR_NGROK_EDGE>
+    addr: nginx:80
