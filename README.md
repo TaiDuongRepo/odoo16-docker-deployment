@@ -68,4 +68,4 @@ Ngrok is a service that provides secure tunnels to access the Odoo service over 
 
 ## Author
 
-- [TaiDuongRepo](github.com/TaiDuongRepo)
+- [TaiDuongRepo](https://github.com/TaiDuongRepo)
